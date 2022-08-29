@@ -87,3 +87,29 @@ ctx.clearRect(75, 75, 100, 70)
 ```
 
 #### 圆弧和圆
+
+arc(x, y, radius, startAngle, endAngle, anticlockwise)
+> 绘制圆弧或者圆 x和Y是圆心的坐标；radius是半径；startAngle是圆弧或圆的开始位置；endAngle是圆弧或圆的结束位置；anticlockwise是绘制的方向（不写默认为false，从顺时针方向）
+
+stroke()
+> 根据当前的画线样式，绘制当前路径
+
+beginPath()
+> 开启新的绘制路径
+
+closePath()
+> 关闭绘制路径
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.arc(400, 400, 50, 0, Math.PI * 2, false)
+ctx.stroke()
+ctx.closePath()
+```
+
+#### 椭圆
+
+ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
+> 绘制椭圆路径 x和Y为椭圆的圆心坐标；radiusX和radiusY是x轴和y轴的半径；rotation是椭圆的旋转角度，以弧度表示；startAngle是开始绘制点；endAngle是结束绘制点；anticlockwise是绘制的方向（默认顺时针）

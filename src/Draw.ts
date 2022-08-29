@@ -14,6 +14,15 @@ interface IPosition {
   height: number
 }
 
+interface IArc {
+  x: number;
+  y: number;
+  radius: number;
+  startAngle: number;
+  endAngle: number;
+  counterclockwise?: boolean;
+}
+
 class Draw {
   ctx: CanvasRenderingContext2D
   constructor(ctx: CanvasRenderingContext2D) {
@@ -61,9 +70,27 @@ class Draw {
       ctx.strokeRect(x, y, width, height)
     }
   }
+  /**
+   * 清除指定矩形区域
+   * @param {IPosition} position 矩形位置
+   */
   clearRect(position: IPosition) {
     const { x, y, width, height } = position
     this.ctx.clearRect(x, y, width, height)
+  }
+  /**
+   * 画圆弧或圆
+   * @param {IArc} options 绘制路径
+   * @param {boolean} isFill 是否填充
+   */
+  arc(options: IArc, isFill = false) {
+    const { x, y, radius, startAngle, endAngle, counterclockwise } = options
+    const { ctx } = this
+    ctx.beginPath()
+    ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise)
+    ctx.stroke()
+    isFill && ctx.fill()
+    ctx.closePath()
   }
 }
 
