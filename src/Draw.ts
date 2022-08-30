@@ -34,6 +34,15 @@ interface IEllipse {
   counterclockwise?: boolean;
 }
 
+interface IQuadraticCurveTo {
+  sx: number;
+  sy: number;
+  cpx: number;
+  cpy: number;
+  ex: number;
+  ey: number;
+}
+
 class Draw {
   ctx: CanvasRenderingContext2D
   constructor(ctx: CanvasRenderingContext2D) {
@@ -115,6 +124,19 @@ class Draw {
     ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterclockwise)
     ctx.stroke()
     isFill && ctx.fill()
+    ctx.closePath()
+  }
+  /**
+   * 画二次曲线
+   * @param {IQuadraticCurveTo} options 绘制路径
+   */
+  quadraticCurveTo(options: IQuadraticCurveTo) {
+    const { ctx } = this
+    const { sx, sy, cpx, cpy, ex, ey } = options
+    ctx.beginPath()
+    ctx.moveTo(sx, sy)
+    ctx.quadraticCurveTo(cpx, cpy, ex, ey)
+    ctx.stroke()
     ctx.closePath()
   }
 }

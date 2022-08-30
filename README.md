@@ -125,4 +125,14 @@ ctx.stroke()
 #### 贝塞尔曲线
 
 quadraticCurveTo(cpx, cpy, x, y)
->
+> 绘制贝塞尔曲线 cpx和cpy是控制点；x和y是结束点
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.moveTo(400, 500)
+ctx.quadraticCurveTo(500, 600, 600, 500)
+ctx.stroke()
+ctx.closePath()
+```

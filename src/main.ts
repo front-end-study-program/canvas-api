@@ -51,3 +51,13 @@ draw.ellipse({
   startAngle: 0,
   endAngle: Math.PI * 2,
 })
+
+// 画贝塞尔二次曲线
+draw.quadraticCurveTo({
+  sx: 400,
+  sy: 500,
+  cpx: 450,
+  cpy: 650,
+  ex: 500,
+  ey: 500
+})
