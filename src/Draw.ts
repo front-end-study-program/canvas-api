@@ -23,6 +23,17 @@ interface IArc {
   counterclockwise?: boolean;
 }
 
+interface IEllipse {
+  x: number;
+  y: number;
+  radiusX: number;
+  radiusY: number;
+  rotation: number;
+  startAngle: number;
+  endAngle: number;
+  counterclockwise?: boolean;
+}
+
 class Draw {
   ctx: CanvasRenderingContext2D
   constructor(ctx: CanvasRenderingContext2D) {
@@ -88,6 +99,20 @@ class Draw {
     const { ctx } = this
     ctx.beginPath()
     ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise)
+    ctx.stroke()
+    isFill && ctx.fill()
+    ctx.closePath()
+  }
+  /**
+   * 画椭圆
+   * @param {IEllipse} options 绘制路径
+   * @param {boolean} 是否填充 
+   */
+  ellipse(options: IEllipse, isFill = false) {
+    const { ctx } = this
+    const { x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterclockwise } = options
+    ctx.beginPath()
+    ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, counterclockwise)
     ctx.stroke()
     isFill && ctx.fill()
     ctx.closePath()

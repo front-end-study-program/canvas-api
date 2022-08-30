@@ -113,3 +113,16 @@ ctx.closePath()
 
 ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise)
 > 绘制椭圆路径 x和Y为椭圆的圆心坐标；radiusX和radiusY是x轴和y轴的半径；rotation是椭圆的旋转角度，以弧度表示；startAngle是开始绘制点；endAngle是结束绘制点；anticlockwise是绘制的方向（默认顺时针）
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.ellipse(100, 150, 50, 100, 0, 0, 2 * Math.PI)
+ctx.stroke()
+```
+
+#### 贝塞尔曲线
+
+quadraticCurveTo(cpx, cpy, x, y)
+>

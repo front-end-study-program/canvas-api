@@ -31,6 +31,7 @@ draw.arc({
   counterclockwise: false
 })
 
+// 画填充圆和填充圆弧
 draw.arc({
   x: 600,
   y: 600,
@@ -39,3 +40,14 @@ draw.arc({
   endAngle: Math.PI * 2,
   counterclockwise: false
 }, true)
+
+// 画椭圆
+draw.ellipse({
+  x: 250,
+  y: 350,
+  radiusX: 50,
+  radiusY: 100,
+  rotation: 0,
+  startAngle: 0,
+  endAngle: Math.PI * 2,
+})
