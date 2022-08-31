@@ -52,7 +52,7 @@ draw.ellipse({
   endAngle: Math.PI * 2,
 })
 
-// 画贝塞尔二次曲线
+// 画二次贝塞尔曲线
 draw.quadraticCurveTo({
   sx: 400,
   sy: 500,
@@ -60,4 +60,16 @@ draw.quadraticCurveTo({
   cpy: 650,
   ex: 500,
   ey: 500
+})
+
+// 画三次贝塞尔曲线
+draw.bezierCurveTo({
+  sx: 50,
+  sy: 200,
+  cpx1: 150,
+  cpy1: 50,
+  cpx2: 250,
+  cpy2: 350,
+  ex: 350,
+  ey: 200
 })

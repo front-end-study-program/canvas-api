@@ -122,10 +122,10 @@ ctx.ellipse(100, 150, 50, 100, 0, 0, 2 * Math.PI)
 ctx.stroke()
 ```
 
-#### 贝塞尔曲线
+#### 二次贝塞尔曲线
 
 quadraticCurveTo(cpx, cpy, x, y)
-> 绘制贝塞尔曲线 cpx和cpy是控制点；x和y是结束点
+> 绘制二次贝塞尔曲线 cpx和cpy是控制点；x和y是结束点
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -135,4 +135,18 @@ ctx.moveTo(400, 500)
 ctx.quadraticCurveTo(500, 600, 600, 500)
 ctx.stroke()
 ctx.closePath()
+```
+
+#### 三次贝塞尔曲线
+
+bezierCurveTo(cp1x,cp1y, cp2x,cp2y, x, y)
+> 绘制三次贝塞尔曲线 cpx1和cpy1是第一个控制点；cpx2和cpy2是第二个控制点；x和y是结束点
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.moveTo(50, 200)
+ctx.bezierCurveTo(150, 50, 250, 350, 350, 200)
+ctx.stroke()
 ```

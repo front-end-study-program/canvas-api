@@ -43,6 +43,17 @@ interface IQuadraticCurveTo {
   ey: number;
 }
 
+interface IBezierCurveTo {
+  sx: number;
+  sy: number;
+  cpx1: number;
+  cpy1: number;
+  cpx2: number;
+  cpy2: number;
+  ex: number;
+  ey: number;
+}
+
 class Draw {
   ctx: CanvasRenderingContext2D
   constructor(ctx: CanvasRenderingContext2D) {
@@ -127,7 +138,7 @@ class Draw {
     ctx.closePath()
   }
   /**
-   * 画二次曲线
+   * 画二次贝塞尔曲线
    * @param {IQuadraticCurveTo} options 绘制路径
    */
   quadraticCurveTo(options: IQuadraticCurveTo) {
@@ -136,6 +147,15 @@ class Draw {
     ctx.beginPath()
     ctx.moveTo(sx, sy)
     ctx.quadraticCurveTo(cpx, cpy, ex, ey)
+    ctx.stroke()
+    ctx.closePath()
+  }
+  bezierCurveTo(options: IBezierCurveTo) {
+    const { ctx } = this
+    const { sx, sy, cpx1, cpy1, cpx2, cpy2, ex, ey } = options
+    ctx.beginPath()
+    ctx.moveTo(sx, sy)
+    ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, ex, ey)
     ctx.stroke()
     ctx.closePath()
   }
