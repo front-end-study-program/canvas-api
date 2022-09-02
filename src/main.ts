@@ -8,18 +8,48 @@ const ctx = canvas.getContext('2d')
 const draw = new Draw(ctx!)
 
 // 画直线
-draw.straightLine(0, 50, 100, 200)
+draw.straightLine({
+  sx: 0,
+  sy: 50,
+  ex: 100,
+  ey: 200,
+  lineWidth: 20
+})
 
 // 画三角形
-draw.triangle({ Ax: 50, Ay: 50, Bx: 200, By: 200, Cx: 200, Cy: 50 })
+draw.triangle({
+  Ax: 50,
+  Ay: 50,
+  Bx: 200,
+  By: 200,
+  Cx: 200,
+  Cy: 50
+})
 
-draw.triangle({ Ax: 250, Ay: 250, Bx: 300, By: 300, Cx: 400, Cy: 250 })
+draw.triangle({
+  Ax: 250,
+  Ay: 250,
+  Bx: 300,
+  By: 300,
+  Cx: 400,
+  Cy: 250
+})
 
 // 画矩形
-draw.rectangle({ x: 300, y: 50, width: 200, height: 100 }, true)
+draw.rectangle({
+  x: 300,
+  y: 50,
+  width: 200,
+  height: 100
+}, true)
 
 // 清除指定矩形区域
-draw.clearRect({x: 325, y: 75, width: 100, height: 70})
+draw.clearRect({
+  x: 325,
+  y: 75,
+  width: 100,
+  height: 70
+})
 
 // 画圆弧与圆
 draw.arc({
@@ -49,7 +79,7 @@ draw.ellipse({
   radiusY: 100,
   rotation: 0,
   startAngle: 0,
-  endAngle: Math.PI * 2,
+  endAngle: Math.PI * 2
 })
 
 // 画二次贝塞尔曲线

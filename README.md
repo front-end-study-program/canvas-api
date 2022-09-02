@@ -150,3 +150,20 @@ ctx.moveTo(50, 200)
 ctx.bezierCurveTo(150, 50, 250, 350, 350, 200)
 ctx.stroke()
 ```
+
+### 绘制样式
+
+#### 线条的样式
+
+lineWidth
+> 设置当前绘制路径的粗细，默认为 1.0
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+ctx.beginPath()
+ctx.lineWidth = 10
+ctx.moveTo(50, 20)
+ctx.lineTo(250, 20)
+ctx.stroke()
+ctx.closePath()
+```
