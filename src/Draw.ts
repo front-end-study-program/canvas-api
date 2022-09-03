@@ -6,9 +6,13 @@ interface IBasePosition {
 }
 
 interface IStraightLine extends IBasePosition {
-  lineWidth?: number
+  lineWidth?: number;
+  lineCap?: 'butt' | 'round' | 'square';
 }
 
+interface IDashedLine extends IStraightLine {
+  segments: Array<number>;
+}
 interface ITriangle {
   Ax: number; // A点x
   Ay: number; // A点y
@@ -17,13 +21,15 @@ interface ITriangle {
   Cx: number; // C点x
   Cy: number; // C点y
   lineWidth?: number;
+  lineJoin?: 'bevel' | 'round' | 'miter';
+  miterLimit?: number;
 }
 
 interface IPosition {
   x: number;
   y: number;
   width: number;
-  height: number
+  height: number;
 }
 
 interface IArc {
@@ -52,6 +58,7 @@ interface IQuadraticCurveTo extends IBasePosition {
   cpx: number;
   cpy: number;
   lineWidth?: number;
+  lineCap?: 'butt' | 'round' | 'square';
 }
 
 interface IBezierCurveTo extends IBasePosition {
@@ -60,6 +67,7 @@ interface IBezierCurveTo extends IBasePosition {
   cpx2: number;
   cpy2: number;
   lineWidth?: number;
+  lineCap?: 'butt' | 'round' | 'square';
 }
 
 class Draw {
@@ -77,13 +85,35 @@ class Draw {
    */
   straightLine (options: IStraightLine) {
     const { ctx } = this
-    const { sx, sy, ex, ey, lineWidth = 1 } = options
+    const { sx, sy, ex, ey, lineWidth = 1, lineCap = 'butt' } = options
     ctx.beginPath()
     ctx.lineWidth = lineWidth
+    ctx.lineCap = lineCap
     ctx.moveTo(sx, sy)
     ctx.lineTo(ex, ey)
     ctx.stroke()
-    ctx.closePath()
+  }
+
+  dashedLine (options: IDashedLine) {
+    const { ctx } = this
+    const {
+      sx,
+      sy,
+      ex,
+      ey,
+      lineWidth = 1,
+      lineCap = 'butt',
+      segments = []
+    } = options
+    ctx.beginPath()
+    ctx.lineWidth = lineWidth
+    ctx.lineCap = lineCap
+    ctx.setLineDash(segments)
+    ctx.moveTo(sx, sy)
+    ctx.lineTo(ex, ey)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.setLineDash([])
   }
 
   /**
@@ -92,15 +122,26 @@ class Draw {
    */
   triangle (options: ITriangle) {
     const { ctx } = this
-    const { Ax, Ay, Bx, By, Cx, Cy, lineWidth = 1 } = options
+    const {
+      Ax,
+      Ay,
+      Bx,
+      By,
+      Cx,
+      Cy,
+      lineWidth = 1,
+      lineJoin = 'miter',
+      miterLimit = 10
+    } = options
     ctx.beginPath()
     ctx.lineWidth = lineWidth
+    ctx.lineJoin = lineJoin
+    ctx.miterLimit = miterLimit
     ctx.moveTo(Ax, Ay)
     ctx.lineTo(Bx, By)
     ctx.lineTo(Cx, Cy)
-    ctx.lineTo(Ax, Ay)
-    ctx.stroke()
     ctx.closePath()
+    ctx.stroke()
   }
 
   /**
@@ -148,7 +189,6 @@ class Draw {
     ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise)
     ctx.stroke()
     isFill && ctx.fill()
-    ctx.closePath()
   }
 
   /**
@@ -159,7 +199,8 @@ class Draw {
   ellipse (options: IEllipse, isFill = false) {
     const { ctx } = this
     const {
-      x, y,
+      x,
+      y,
       radiusX,
       radiusY,
       rotation,
@@ -182,7 +223,6 @@ class Draw {
     )
     ctx.stroke()
     isFill && ctx.fill()
-    ctx.closePath()
   }
 
   /**
@@ -191,13 +231,22 @@ class Draw {
    */
   quadraticCurveTo (options: IQuadraticCurveTo) {
     const { ctx } = this
-    const { sx, sy, cpx, cpy, ex, ey, lineWidth = 1 } = options
+    const {
+      sx,
+      sy,
+      cpx,
+      cpy,
+      ex,
+      ey,
+      lineWidth = 1,
+      lineCap = 'butt'
+    } = options
     ctx.beginPath()
     ctx.lineWidth = lineWidth
+    ctx.lineCap = lineCap
     ctx.moveTo(sx, sy)
     ctx.quadraticCurveTo(cpx, cpy, ex, ey)
     ctx.stroke()
-    ctx.closePath()
   }
 
   /**
@@ -206,13 +255,24 @@ class Draw {
    */
   bezierCurveTo (options: IBezierCurveTo) {
     const { ctx } = this
-    const { sx, sy, cpx1, cpy1, cpx2, cpy2, ex, ey, lineWidth = 1 } = options
+    const {
+      sx,
+      sy,
+      cpx1,
+      cpy1,
+      cpx2,
+      cpy2,
+      ex,
+      ey,
+      lineWidth = 1,
+      lineCap = 'butt'
+    } = options
     ctx.beginPath()
     ctx.lineWidth = lineWidth
+    ctx.lineCap = lineCap
     ctx.moveTo(sx, sy)
     ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, ex, ey)
     ctx.stroke()
-    ctx.closePath()
   }
 }
 

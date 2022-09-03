@@ -9,11 +9,12 @@ const draw = new Draw(ctx!)
 
 // 画直线
 draw.straightLine({
-  sx: 0,
-  sy: 50,
+  sx: 10,
+  sy: 200,
   ex: 100,
   ey: 200,
-  lineWidth: 20
+  lineWidth: 20,
+  lineCap: 'round'
 })
 
 // 画三角形
@@ -23,16 +24,21 @@ draw.triangle({
   Bx: 200,
   By: 200,
   Cx: 200,
-  Cy: 50
+  Cy: 50,
+  lineWidth: 10,
+  // lineJoin: 'miter',
+  miterLimit: 3
 })
 
 draw.triangle({
-  Ax: 250,
+  Ax: 350,
   Ay: 250,
-  Bx: 300,
+  Bx: 400,
   By: 300,
   Cx: 400,
-  Cy: 250
+  Cy: 250,
+  lineWidth: 5,
+  lineJoin: 'bevel'
 })
 
 // 画矩形
@@ -79,7 +85,8 @@ draw.ellipse({
   radiusY: 100,
   rotation: 0,
   startAngle: 0,
-  endAngle: Math.PI * 2
+  endAngle: Math.PI * 2,
+  lineWidth: 10
 })
 
 // 画二次贝塞尔曲线
@@ -89,7 +96,8 @@ draw.quadraticCurveTo({
   cpx: 450,
   cpy: 650,
   ex: 500,
-  ey: 500
+  ey: 500,
+  lineWidth: 20
 })
 
 // 画三次贝塞尔曲线
@@ -102,4 +110,13 @@ draw.bezierCurveTo({
   cpy2: 350,
   ex: 350,
   ey: 200
+})
+
+// 画虚线
+draw.dashedLine({
+  sx: 400,
+  sy: 20,
+  ex: 700,
+  ey: 40,
+  segments: [15, 3, 3, 3]
 })

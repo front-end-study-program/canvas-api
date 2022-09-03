@@ -160,10 +160,73 @@ lineWidth
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
 ctx.beginPath()
 ctx.lineWidth = 10
 ctx.moveTo(50, 20)
 ctx.lineTo(250, 20)
 ctx.stroke()
 ctx.closePath()
+```
+
+lineCap
+> 设置线段末端的属性
+> butt | round | square 默认：butt
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.lineWidth = 10
+ctx.lineCap = 'round'
+ctx.moveTo(50, 20)
+ctx.lineTo(250, 20)
+ctx.stroke()
+ctx.closePath()
+```
+
+lineJoin
+>设置 2 个长度不为 0 的相连部分（线段，圆弧，曲线）如何连接在一起的属性
+>bevel | round | miter 默认：miter
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.lineWidth = 5
+ctx.lineJoin = 'round'
+ctx.moveTo(50, 50)
+ctx.lineTo(200, 200)
+ctx.lineTo(200, 50)
+ctx.closePath()
+ctx.stroke()
+```
+
+miterLimit
+> 设置斜接面限制比例的属性 默认为 10.0，只有当 lineJoin 为 miter 时，才有效
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.lineWidth = 5
+ctx.miterLimit = 20
+ctx.moveTo(50, 50)
+ctx.lineTo(200, 200)
+ctx.lineTo(200, 50)
+ctx.closePath()
+ctx.stroke()
+```
+
+setLineDash()
+> 填充线时使用虚线模式。它使用一组值来指定描述模式的线和间隙的交替长度
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.setLineDash([15, 3, 3, 3])
+ctx.moveTo(400, 20)
+ctx.lineTo(700, 40)
+ctx.stroke()
 ```
