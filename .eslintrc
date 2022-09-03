@@ -1,5 +1,8 @@
 {
   "extends": [
     "@study-sea/eslint-config-ts"
-  ]
+  ],
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off"
+  }
 }
