@@ -230,3 +230,37 @@ ctx.moveTo(400, 20)
 ctx.lineTo(700, 40)
 ctx.stroke()
 ```
+
+getLineDash()
+> 返回当前虚线设置的样式，长度为非负偶数的数组。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.setLineDash([15, 3, 3, 3])
+ctx.moveTo(400, 20)
+ctx.lineTo(700, 40)
+ctx.stroke()
+ctx.getLineDash()
+```
+
+lineDashOffset
+> 设置虚线样式的起始偏移量；初始值 0.0
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.setLineDash([15, 3, 3, 3])
+ctx.lineDashOffset = 3
+ctx.moveTo(400, 20)
+ctx.lineTo(700, 40)
+ctx.stroke()
+ctx.getLineDash()
+```
+
+### 透明度
+
+fillStyle
+> 描述颜色和样式的属性。默认值是 #000 （黑色）

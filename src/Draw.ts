@@ -12,6 +12,7 @@ interface IStraightLine extends IBasePosition {
 
 interface IDashedLine extends IStraightLine {
   segments: Array<number>;
+  lineDashOffset?: number;
 }
 interface ITriangle {
   Ax: number; // A点x
@@ -87,6 +88,7 @@ class Draw {
     const { ctx } = this
     const { sx, sy, ex, ey, lineWidth = 1, lineCap = 'butt' } = options
     ctx.beginPath()
+    ctx.setLineDash([])
     ctx.lineWidth = lineWidth
     ctx.lineCap = lineCap
     ctx.moveTo(sx, sy)
@@ -94,6 +96,10 @@ class Draw {
     ctx.stroke()
   }
 
+  /**
+   * 画虚线
+   * @param {IDashedLine} options
+   */
   dashedLine (options: IDashedLine) {
     const { ctx } = this
     const {
@@ -103,17 +109,18 @@ class Draw {
       ey,
       lineWidth = 1,
       lineCap = 'butt',
-      segments = []
+      segments = [],
+      lineDashOffset = 0
     } = options
     ctx.beginPath()
     ctx.lineWidth = lineWidth
     ctx.lineCap = lineCap
     ctx.setLineDash(segments)
+    ctx.lineDashOffset = lineDashOffset
     ctx.moveTo(sx, sy)
     ctx.lineTo(ex, ey)
     ctx.stroke()
     ctx.beginPath()
-    ctx.setLineDash([])
   }
 
   /**

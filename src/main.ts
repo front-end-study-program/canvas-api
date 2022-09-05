@@ -118,5 +118,24 @@ draw.dashedLine({
   sy: 20,
   ex: 700,
   ey: 40,
-  segments: [15, 3, 3, 3]
+  segments: [15, 5, 5, 5],
+  lineDashOffset: 0.5
+})
+
+draw.dashedLine({
+  sx: 600,
+  sy: 20,
+  ex: 800,
+  ey: 40,
+  segments: [5, 10, 20, 40],
+  lineDashOffset: 3
+})
+
+console.log('getLineDash', ctx?.getLineDash())
+
+draw.straightLine({
+  sx: 500,
+  sy: 550,
+  ex: 700,
+  ey: 710
 })
