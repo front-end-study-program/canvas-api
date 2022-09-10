@@ -156,12 +156,19 @@ class Draw {
    * @param {IPosition} position 矩形位置
    * @param {boolean} isFill 是否填充
    */
-  rectangle (position: IPosition, isFill = false) {
+  rectangle (
+    position: IPosition,
+    isFill = false,
+    fillStyle = 'black',
+    strokeStyle = '#000'
+  ) {
     const { ctx } = this
     const { x, y, width, height } = position
     if (isFill) {
+      ctx.fillStyle = fillStyle
       ctx.fillRect(x, y, width, height)
     } else {
+      ctx.strokeStyle = strokeStyle
       ctx.strokeRect(x, y, width, height)
     }
   }
@@ -180,7 +187,13 @@ class Draw {
    * @param {IArc} options 绘制路径
    * @param {boolean} isFill 是否填充
    */
-  arc (options: IArc, isFill = false) {
+  arc (
+    options: IArc,
+    isFill = false,
+    fillStyle = 'black',
+    strokeStyle = '#000',
+    globalAlpha = 1
+  ) {
     const {
       x,
       y,
@@ -192,7 +205,10 @@ class Draw {
     } = options
     const { ctx } = this
     ctx.beginPath()
+    ctx.fillStyle = fillStyle
+    ctx.strokeStyle = strokeStyle
     ctx.lineWidth = lineWidth
+    ctx.globalAlpha = globalAlpha
     ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise)
     ctx.stroke()
     isFill && ctx.fill()

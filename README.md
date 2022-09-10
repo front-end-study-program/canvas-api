@@ -263,4 +263,35 @@ ctx.getLineDash()
 ### 透明度
 
 fillStyle
-> 描述颜色和样式的属性。默认值是 #000 （黑色）
+> 描述填充的颜色和样式的属性。默认值是 #000 （黑色） color | gradient | pattern
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.fillStyle = 'rgba(0, 255, 0, 0.2)'
+ctx.fillRect(300, 50, 200, 100)
+```
+
+strokeStyle
+> 描述描边的样式。默认值是 #000（黑色）color | gradient | pattern
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.strokeStyle = "rgba(255, 0, 0, 0.7)"
+ctx.strokeRect(10, 90, 100, 300)
+```
+
+globalAlpha
+> 设置图形和图片透明度的属性
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.globalAlpha = 0.5
+ctx.arc(200, 200, 100, 0, Math.PI*2, true)
+ctx.fill()
+```

@@ -47,7 +47,7 @@ draw.rectangle({
   y: 50,
   width: 200,
   height: 100
-}, true)
+}, true, 'rgba(0, 255, 0, 0.2)')
 
 // 清除指定矩形区域
 draw.clearRect({
@@ -65,7 +65,7 @@ draw.arc({
   startAngle: 0,
   endAngle: Math.PI * 2,
   counterclockwise: false
-})
+}, false, '#000', 'rgba(255, 0, 0, 0.7)', 0.3)
 
 // 画填充圆和填充圆弧
 draw.arc({
@@ -123,7 +123,7 @@ draw.dashedLine({
 })
 
 draw.dashedLine({
-  sx: 600,
+  sx: 700,
   sy: 20,
   ex: 800,
   ey: 40,
