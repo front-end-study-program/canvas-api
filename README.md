@@ -295,3 +295,29 @@ ctx.globalAlpha = 0.5
 ctx.arc(200, 200, 100, 0, Math.PI*2, true)
 ctx.fill()
 ```
+
+### 渐变
+
+> 渐变分为两种，分别是线性渐变和径向渐变，在绘图中我们可以用线性或者径向的渐变来填充或描边
+
+#### 线性渐变
+
+createLinearGradient(x0, y0, x1, y1)
+> 创建一个沿参数坐标指定的直线的渐变；该方法返回一个线性 CanvasGradient 对象。想要应用这个渐变，需要把这个返回值赋值给 fillStyle 或者 strokeStyle。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const gradient1 = ctx.createLinearGradient(10, 10, 400, 10)
+gradient1.addColorStop(0, "#00ff00")
+gradient1.addColorStop(1, "#ff0000")
+gradient2 = ctx.createLinearGradient(10, 10, 400, 10)
+gradient2.addColorStop(0.5, "#00ff00")
+gradient2.addColorStop(1, "#ff0000")
+ctx.beginPath()
+ctx.fillStyle = gradient1
+ctx.fillRect(10, 10, 400, 100)
+ctx.beginPath()
+ctx.fillStyle = gradient2
+ctx.fillRect(10, 150, 400, 100)
+```

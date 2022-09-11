@@ -139,3 +139,16 @@ draw.straightLine({
   ex: 700,
   ey: 710
 })
+
+const gradient1 = ctx!.createLinearGradient(10, 10, 400, 10)
+gradient1.addColorStop(0, '#00ff00')
+gradient1.addColorStop(1, '#ff0000')
+const gradient2 = ctx!.createLinearGradient(10, 10, 400, 10)
+gradient2.addColorStop(0.5, '#00ff00')
+gradient2.addColorStop(1, '#ff0000')
+ctx!.beginPath()
+ctx!.fillStyle = gradient1
+ctx!.fillRect(10, 10, 400, 100)
+ctx!.beginPath()
+ctx!.fillStyle = gradient2
+ctx!.fillRect(10, 150, 400, 100)
