@@ -321,3 +321,19 @@ ctx.beginPath()
 ctx.fillStyle = gradient2
 ctx.fillRect(10, 150, 400, 100)
 ```
+
+#### 径向渐变
+
+createRadialGradient(x0, y0, r0, x1, y1, r1)
+> 根据参数确定两个圆的坐标，绘制放射性渐变的方法
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const gradient2 = ctx.createRadialGradient(100, 100, 100, 100, 100, 0)
+gradient2.addColorStop(0, '#ff770f')
+gradient2.addColorStop(1, '#ffffff')
+ctx.beginPath()
+ctx.fillStyle = gradient2
+ctx.fillRect(10, 10, 200, 200)
+```

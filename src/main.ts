@@ -140,15 +140,19 @@ draw.straightLine({
   ey: 710
 })
 
+// 线性渐变
 const gradient1 = ctx!.createLinearGradient(10, 10, 400, 10)
 gradient1.addColorStop(0, '#00ff00')
 gradient1.addColorStop(1, '#ff0000')
-const gradient2 = ctx!.createLinearGradient(10, 10, 400, 10)
-gradient2.addColorStop(0.5, '#00ff00')
-gradient2.addColorStop(1, '#ff0000')
 ctx!.beginPath()
 ctx!.fillStyle = gradient1
 ctx!.fillRect(10, 10, 400, 100)
+
+// 径向渐变
+const gradient2 = ctx!.createRadialGradient(100, 100, 100, 100, 100, 0)
+gradient2.addColorStop(0, '#ff770f')
+gradient2.addColorStop(1, '#ffffff')
+
 ctx!.beginPath()
 ctx!.fillStyle = gradient2
-ctx!.fillRect(10, 150, 400, 100)
+ctx!.fillRect(10, 10, 200, 200)
