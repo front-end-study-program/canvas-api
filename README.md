@@ -1,6 +1,6 @@
 # canvas-api
 
-canvas 相关API练习操场
+canvas 相关API练习操场 [掘金学习链接](https://juejin.cn/post/7119495608938790942)
 
 ## API
 
@@ -336,4 +336,23 @@ gradient2.addColorStop(1, '#ffffff')
 ctx.beginPath()
 ctx.fillStyle = gradient2
 ctx.fillRect(10, 10, 200, 200)
+```
+
+### 图案样式
+
+createPattern(image, repetition)
+> 使用指定的图像 (CanvasImageSource) 创建模式的方法。它通过 repetition 参数在指定的方向上重复元图像。此方法返回一个CanvasPattern对象。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const img = new Image()
+img.src = '图片路径'
+img.onload = function () {
+  // 图片加载完以后
+  // 创建图案
+  const pattern = ctx!.createPattern(img, 'repeat')
+  ctx!.fillStyle = pattern as CanvasPattern
+  ctx!.fillRect(0, 0, 500, 500)
+}
 ```
