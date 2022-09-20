@@ -159,12 +159,19 @@ const ctx = canvas.getContext('2d')
 // ctx!.fillRect(10, 10, 200, 200)
 
 // 绘制图片
-const img = new Image()
-img.src = image
-img.onload = function () {
-  // 图片加载完以后
-  // 创建图案
-  const pattern = ctx!.createPattern(img, 'repeat-x')
-  ctx!.fillStyle = pattern as CanvasPattern
-  ctx!.fillRect(0, 0, 500, 500)
-}
+// const img = new Image()
+// img.src = image
+// img.onload = function () {
+//   // 图片加载完以后
+//   // 创建图案
+//   const pattern = ctx!.createPattern(img, 'repeat-x')
+//   ctx!.fillStyle = pattern as CanvasPattern
+//   ctx!.fillRect(0, 0, 500, 500)
+// }
+
+// 绘制描边文字
+// ctx!.font = '50px serif'
+// ctx!.strokeText('hello world', 100, 200, 400)
+
+ctx!.font = '50px serif' // 设置文案大小和字体
+ctx!.fillText('hello world', 100, 200, 400)

@@ -260,7 +260,7 @@ ctx.stroke()
 ctx.getLineDash()
 ```
 
-### 透明度
+#### 透明度
 
 fillStyle
 > 描述填充的颜色和样式的属性。默认值是 #000 （黑色） color | gradient | pattern
@@ -296,11 +296,11 @@ ctx.arc(200, 200, 100, 0, Math.PI*2, true)
 ctx.fill()
 ```
 
-### 渐变
+#### 渐变
 
 > 渐变分为两种，分别是线性渐变和径向渐变，在绘图中我们可以用线性或者径向的渐变来填充或描边
 
-#### 线性渐变
+##### 线性渐变
 
 createLinearGradient(x0, y0, x1, y1)
 > 创建一个沿参数坐标指定的直线的渐变；该方法返回一个线性 CanvasGradient 对象。想要应用这个渐变，需要把这个返回值赋值给 fillStyle 或者 strokeStyle。
@@ -322,7 +322,7 @@ ctx.fillStyle = gradient2
 ctx.fillRect(10, 150, 400, 100)
 ```
 
-#### 径向渐变
+##### 径向渐变
 
 createRadialGradient(x0, y0, r0, x1, y1, r1)
 > 根据参数确定两个圆的坐标，绘制放射性渐变的方法
@@ -338,7 +338,7 @@ ctx.fillStyle = gradient2
 ctx.fillRect(10, 10, 200, 200)
 ```
 
-### 图案样式
+#### 图案样式
 
 createPattern(image, repetition)
 > 使用指定的图像 (CanvasImageSource) 创建模式的方法。它通过 repetition 参数在指定的方向上重复元图像。此方法返回一个CanvasPattern对象。
@@ -355,4 +355,32 @@ img.onload = function () {
   ctx!.fillStyle = pattern as CanvasPattern
   ctx!.fillRect(0, 0, 500, 500)
 }
+```
+
+### 绘制文本
+
+> canvas 中提供了两种方法来渲染文本，一种是描边一种是填充
+
+#### 描边文字
+
+strokeText(text, x, y, [, maxWidth])
+> 在给定的 (x, y) 位置绘制文本的方法。如果提供了表示最大值的第四个参数，文本将会缩放适应宽度.
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font = '50px serif'
+ctx.strokeText('hello world', 100, 200, 400)
+```
+
+#### 填充文字
+
+fillText(text, x, y, [, maxWidth])
+> 在 (x, y) 位置填充文本的方法。如果选项的第四个参数提供了最大宽度，文本会进行缩放以适应最大宽度。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font = '50px serif'
+ctx.strokeText('hello world', 100, 200, 400)
 ```
