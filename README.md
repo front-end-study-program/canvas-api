@@ -369,7 +369,6 @@ strokeText(text, x, y, [, maxWidth])
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d')
-ctx.font = '50px serif'
 ctx.strokeText('hello world', 100, 200, 400)
 ```
 
@@ -381,6 +380,71 @@ fillText(text, x, y, [, maxWidth])
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d')
-ctx.font = '50px serif'
 ctx.strokeText('hello world', 100, 200, 400)
+```
+
+#### 文本样式
+
+font
+> font 属性可以用来作为 font-style, font-variant, font-weight, font-size, line-height 和 font-family 属性的简写，或将元素的字体设置为系统字体。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font='50px sans-serif'
+ctx.strokeText('hello world', 100, 200, 400)
+```
+
+textAlign
+> 文本的对齐方式的属性。注意，该对齐是基于 fillText 方法的 x 的值。所以如果 textAlign="center"，那么该文本将画在 x-50%*width。默认 start
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font = '50px sans-serif'
+ctx.textAlign = 'left'
+ctx.fillText('hello world', 100, 200, 400)
+```
+
+direction
+> 描述当前文本方向的属性。ltr（文本方向从左向右） | rtl（文本方向从右向左） | 默认值：inherit（根据情况继承 <canvas> 元素或者 Document）
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font = '50px sans-serif'
+ctx.direction = 'rtl'
+ctx.fillText('hello world', 500, 200, 400)
+```
+
+textBaseline
+> 描述绘制文本时，当前文本基线的属性。top | hanging | middle | alphabetic | ideographic | bottom
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const baselines =
+   ['top', 'hanging', 'middle', 'alphabetic', 'ideographic', 'bottom']
+ctx.font = '36px serif'
+ctx.strokeStyle = 'red'
+
+baselines.forEach((baseline, index) => {
+  ctx.textBaseline = baseline as CanvasTextBaseline
+  const y = 75 + index * 75
+  ctx.beginPath()
+  ctx.moveTo(0, y + 0.5)
+  ctx.lineTo(550, y + 0.5)
+  ctx.stroke()
+  ctx.fillText('Abcdefghijklmnop (' + baseline + ')', 0, y)
+})
+```
+
+measureText(string)
+> 返回一个关于被测量文本 TextMetrics 对象包含的信息。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+text = ctx.measureText("foo");
+text.width;
 ```

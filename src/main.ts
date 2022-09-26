@@ -173,5 +173,26 @@ const ctx = canvas.getContext('2d')
 // ctx!.font = '50px serif'
 // ctx!.strokeText('hello world', 100, 200, 400)
 
-ctx!.font = '50px serif' // 设置文案大小和字体
-ctx!.fillText('hello world', 100, 200, 400)
+// ctx!.font = '50px sans-serif' // 设置文案大小和字体
+// // ctx!.textAlign = 'left'
+// ctx!.direction = 'rtl'
+// ctx!.fillText('hello world', 500, 200, 400)
+
+// const baselines =
+//    ['top', 'hanging', 'middle', 'alphabetic', 'ideographic', 'bottom']
+// ctx!.font = '36px serif'
+// ctx!.strokeStyle = 'red'
+
+// baselines.forEach((baseline, index) => {
+//   ctx!.textBaseline = baseline as CanvasTextBaseline
+//   const y = 75 + index * 75
+//   ctx!.beginPath()
+//   ctx!.moveTo(0, y + 0.5)
+//   ctx!.lineTo(550, y + 0.5)
+//   ctx!.stroke()
+//   ctx!.fillText('Abcdefghijklmnop (' + baseline + ')', 0, y)
+// })
+
+const text = ctx!.measureText('foo')
+
+console.log(text.width)
