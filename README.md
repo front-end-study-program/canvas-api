@@ -445,6 +445,38 @@ measureText(string)
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d')
-text = ctx.measureText("foo");
+const text = ctx.measureText("foo");
 text.width;
+```
+
+#### 阴影
+
+shadowOffsetX、shadowOffsetY
+
+> shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0
+
+shadowBlur
+
+> shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0
+
+shadowColor
+
+> shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.font = '50px serif' // 设置文案大小和字体
+ctx.shadowColor = '#cccccc' //  设置阴影颜色
+ctx.fillStyle = '#ee7934' //  设置填充颜色
+ctx.shadowOffsetX = 10 // X轴上的阴影
+ctx.shadowOffsetY = 10 // Y轴上的阴影
+ctx.shadowBlur = 5 // 阴影的模糊程度
+ctx.fillText('Hi Canvas !', 100, 50)
+ctx.fillRect(100, 100, 200, 100)
+ctx.shadowOffsetX = -10
+ctx.shadowOffsetY = -10
+ctx.shadowBlur = 5
+ctx.fillText('Hi Canvas !', 100, 300)
+ctx.fillRect(100, 350, 200, 100)
 ```
