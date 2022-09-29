@@ -445,8 +445,8 @@ measureText(string)
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const ctx = canvas.getContext('2d')
-const text = ctx.measureText("foo");
-text.width;
+const text = ctx.measureText("foo")
+text.width
 ```
 
 #### 阴影
@@ -499,4 +499,56 @@ img.onload = function () {
   // ctx.drawImage(img, 0, 0, 100, 100) // 设置图片大小，缩放
   ctx.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100) // 裁剪
 }
+```
+
+### 变形
+
+#### 状态的保存和恢复
+
+save() 和 restore() 方法是用来保存和恢复 canvas 状态的，方法不需要参数。可以理解为就是对canvas 状态的快照进行保存和恢复。
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.fillStyle = '#cccccc';
+ctx.fillRect(10, 10, 300, 100)
+ctx.save(); // 保存状态
+ctx.fillStyle = '#ee7034'
+ctx.fillRect(10, 150, 300, 100)
+ctx.restore() // 还原到上次保存的状态
+ctx.fillRect(10, 300, 300, 100)
+```
+
+translate(x, y)
+
+将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行平移变换
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.translate(50, 50)
+ctx.fillRect(0, 0, 100, 100)
+```
+
+rotate()
+
+将 canvas 的角度进行旋转
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.rotate(45 * Math.PI / 180)
+ctx.fillRect(70,0,100,30)
+```
+
+scale(x, y)
+
+将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行缩放
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.scale(9, 3)
+ctx.fillStyle = 'red'
+ctx.fillRect(10, 10, 8, 20)
 ```

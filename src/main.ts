@@ -211,12 +211,34 @@ const ctx = canvas.getContext('2d')
 // ctx!.fillText('Hi Canvas !', 100, 300)
 // ctx!.fillRect(100, 350, 200, 100)
 
-const img = new Image()
-img.src = image
-img.onload = function () {
-  // 图片加载完以后
-  // 创建图案
-  // ctx!.drawImage(img, 0, 0) // 绘制
-  // ctx!.drawImage(img, 0, 0, 100, 100) // 缩放
-  ctx!.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100) // 裁剪
-}
+// const img = new Image()
+// img.src = image
+// img.onload = function () {
+//   // 图片加载完以后
+//   // 创建图案
+//   // ctx!.drawImage(img, 0, 0) // 绘制
+//   // ctx!.drawImage(img, 0, 0, 100, 100) // 缩放
+//   ctx!.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100) // 裁剪
+// }
+
+// 保存和恢复
+// ctx!.fillStyle = '#cccccc'
+// ctx!.fillRect(10, 10, 300, 100)
+// ctx!.save() // 保存状态
+// ctx!.fillStyle = '#ee7034'
+// ctx!.fillRect(10, 150, 300, 100)
+// ctx!.restore() // 还原到上次保存的状态
+// ctx!.fillRect(10, 300, 300, 100)
+
+// 平移
+// ctx!.translate(50, 50)
+// ctx!.fillRect(0, 0, 100, 100)
+
+// 旋转
+// ctx!.rotate(45 * Math.PI / 180)
+// ctx!.fillRect(70, 0, 100, 30)
+
+// 缩放
+ctx!.scale(9, 3)
+ctx!.fillStyle = 'red'
+ctx!.fillRect(10, 10, 8, 20)
