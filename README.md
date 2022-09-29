@@ -480,3 +480,23 @@ ctx.shadowBlur = 5
 ctx.fillText('Hi Canvas !', 100, 300)
 ctx.fillRect(100, 350, 200, 100)
 ```
+
+### 绘制图片
+
+drawImage(image: CanvasImageSource, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number)
+
+> 绘制图片、视频和别的Canvas对象
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const img = new Image()
+img.src = image
+img.onload = function () {
+  // 图片加载完以后
+  // 绘制图案
+  // ctx.drawImage(img, 0, 0) // 绘制
+  // ctx.drawImage(img, 0, 0, 100, 100) // 设置图片大小，缩放
+  ctx.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100) // 裁剪
+}
+```

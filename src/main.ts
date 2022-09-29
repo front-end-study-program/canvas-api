@@ -197,16 +197,26 @@ const ctx = canvas.getContext('2d')
 
 // console.log(text.width)
 
-ctx!.font = '50px serif' // 设置文案大小和字体
-ctx!.shadowColor = '#cccccc' //  设置阴影颜色
-ctx!.fillStyle = '#ee7934' //  设置填充颜色
-ctx!.shadowOffsetX = 10 // X轴上的阴影
-ctx!.shadowOffsetY = 10 // Y轴上的阴影
-ctx!.shadowBlur = 5 // 阴影的模糊程度
-ctx!.fillText('Hi Canvas !', 100, 50)
-ctx!.fillRect(100, 100, 200, 100)
-ctx!.shadowOffsetX = -10
-ctx!.shadowOffsetY = -10
-ctx!.shadowBlur = 5
-ctx!.fillText('Hi Canvas !', 100, 300)
-ctx!.fillRect(100, 350, 200, 100)
+// ctx!.font = '50px serif' // 设置文案大小和字体
+// ctx!.shadowColor = '#cccccc' //  设置阴影颜色
+// ctx!.fillStyle = '#ee7934' //  设置填充颜色
+// ctx!.shadowOffsetX = 10 // X轴上的阴影
+// ctx!.shadowOffsetY = 10 // Y轴上的阴影
+// ctx!.shadowBlur = 5 // 阴影的模糊程度
+// ctx!.fillText('Hi Canvas !', 100, 50)
+// ctx!.fillRect(100, 100, 200, 100)
+// ctx!.shadowOffsetX = -10
+// ctx!.shadowOffsetY = -10
+// ctx!.shadowBlur = 5
+// ctx!.fillText('Hi Canvas !', 100, 300)
+// ctx!.fillRect(100, 350, 200, 100)
+
+const img = new Image()
+img.src = image
+img.onload = function () {
+  // 图片加载完以后
+  // 创建图案
+  // ctx!.drawImage(img, 0, 0) // 绘制
+  // ctx!.drawImage(img, 0, 0, 100, 100) // 缩放
+  ctx!.drawImage(img, 0, 0, 300, 300, 0, 0, 100, 100) // 裁剪
+}
