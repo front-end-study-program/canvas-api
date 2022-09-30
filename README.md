@@ -503,9 +503,7 @@ img.onload = function () {
 
 ### 变形
 
-#### 状态的保存和恢复
-
-save() 和 restore() 方法是用来保存和恢复 canvas 状态的，方法不需要参数。可以理解为就是对canvas 状态的快照进行保存和恢复。
+> save() 和 restore() 方法是用来保存和恢复 canvas 状态的，方法不需要参数。可以理解为就是对canvas 状态的快照进行保存和恢复。
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -521,7 +519,7 @@ ctx.fillRect(10, 300, 300, 100)
 
 translate(x, y)
 
-将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行平移变换
+> 将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行平移变换
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -532,7 +530,7 @@ ctx.fillRect(0, 0, 100, 100)
 
 rotate()
 
-将 canvas 的角度进行旋转
+> 将 canvas 的角度进行旋转
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -543,7 +541,7 @@ ctx.fillRect(70,0,100,30)
 
 scale(x, y)
 
-将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行缩放
+> 将 canvas 按原始 x 点的水平方向、原始的 y 点垂直方向进行缩放
 
 ```ts
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
@@ -551,4 +549,55 @@ const ctx = canvas.getContext('2d')
 ctx.scale(9, 3)
 ctx.fillStyle = 'red'
 ctx.fillRect(10, 10, 8, 20)
+```
+
+transform(a, b, c, d, e, f)
+
+> 可以缩放、旋转、移动和倾斜 canvas 的方法
+
+**参数:**
+
+- a：水平缩放
+- b：垂直倾斜
+- c：水平倾斜
+- d：垂直缩放
+- e：水平移动
+- f：垂直移动
+
+```ts
+/**
+ *  
+      a c e
+    [ b d f ]
+      0 0 1 
+ *  
+*/
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.transform(1, 1, 0, 1, 0, 0)
+ctx.fillRect(0, 0, 100, 100)
+```
+
+setTransform(a, b, c, d, e, f)
+
+> 会将当前变形矩阵重置为单位矩阵，然后用相同的参数调用 transform 方法
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.setTransform(1, 1, 0, 1, 0, 0)
+ctx.fillRect(0, 0, 100, 100)
+```
+
+resetTransform()
+
+> 重置当前变形为单位矩阵。效果等同于调用 setTransform(1, 0, 0, 1, 0, 0)
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+
+ctx.rotate(45 * Math.PI / 180)
+ctx.fillRect(70, 0, 100, 30)
+ctx.resetTransform()
 ```

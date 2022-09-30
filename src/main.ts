@@ -239,6 +239,15 @@ const ctx = canvas.getContext('2d')
 // ctx!.fillRect(70, 0, 100, 30)
 
 // 缩放
-ctx!.scale(9, 3)
-ctx!.fillStyle = 'red'
-ctx!.fillRect(10, 10, 8, 20)
+// ctx!.scale(9, 3)
+// ctx!.fillStyle = 'red'
+// ctx!.fillRect(10, 10, 8, 20)
+
+// 缩放，旋转，移动，倾斜
+// ctx!.transform(2, 1, 0, 1, 2, 5)
+// ctx!.fillRect(0, 0, 100, 100)
+
+ctx!.rotate(45 * Math.PI / 180)
+ctx!.fillRect(70, 0, 100, 30)
+
+ctx!.resetTransform()
