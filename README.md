@@ -601,3 +601,48 @@ ctx.rotate(45 * Math.PI / 180)
 ctx.fillRect(70, 0, 100, 30)
 ctx.resetTransform()
 ```
+
+### 合成和裁剪
+
+#### 合成
+
+>合成的图形受限于绘制的顺序。如果我们不想受限于绘制的顺序，那么我们可以利用 globalCompositeOperation 属性来改变这种情况。
+
+globalCompositeOperation
+
+> globalCompositeOperation = type，type为合成的类型
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.globalCompositeOperation = 'source-over'
+
+ctx.fillStyle = 'blue'
+ctx.fillRect(10, 10, 100, 100)
+
+ctx.fillStyle = 'red'
+ctx.fillRect(50, 50, 100, 100)
+```
+
+#### 裁剪
+
+> 裁剪的作用是遮罩，用来隐藏不需要的部分，所有在路径以外的部分都不会在 canvas 上绘制出来
+
+clip()
+
+> 将当前正在构建的路径转换为当前的裁剪路径
+
+```ts
+import image from './image/logo.png'
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+const img = new Image()
+img.src = image
+img.onload = () => {
+  // 创建圆形裁剪路径
+  ctx?.arc(250, 250, 200, 0, Math.PI * 2, false)
+  ctx?.clip()
+  // 创建完之后绘制
+  ctx?.drawImage(img, 0, 0, 500, 500)
+}
+```

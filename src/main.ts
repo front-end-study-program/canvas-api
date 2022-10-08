@@ -247,7 +247,31 @@ const ctx = canvas.getContext('2d')
 // ctx!.transform(2, 1, 0, 1, 2, 5)
 // ctx!.fillRect(0, 0, 100, 100)
 
-ctx!.rotate(45 * Math.PI / 180)
-ctx!.fillRect(70, 0, 100, 30)
+// ctx!.rotate(45 * Math.PI / 180)
+// ctx!.fillRect(70, 0, 100, 30)
 
-ctx!.resetTransform()
+// ctx!.resetTransform()
+
+// ctx!.globalCompositeOperation = 'source-over'
+// ctx!.globalCompositeOperation = 'source-in'
+// ctx!.globalCompositeOperation = 'source-out'
+// ctx!.globalCompositeOperation = 'source-atop'
+// ctx!.globalCompositeOperation = 'destination-over'
+
+// ctx!.fillStyle = 'blue'
+// ctx!.fillRect(10, 10, 100, 100)
+
+// ctx!.fillStyle = 'red'
+// ctx!.fillRect(50, 50, 100, 100)
+
+const img = new Image()
+
+img.src = image
+
+img.onload = () => {
+  // 创建圆形裁剪路径
+  ctx?.arc(250, 250, 200, 0, Math.PI * 2, false)
+  ctx?.clip()
+  // 创建完之后绘制
+  ctx?.drawImage(img, 0, 0, 500, 500)
+}
