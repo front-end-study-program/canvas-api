@@ -281,11 +281,9 @@ const moon = new Image()
 const earth = new Image()
 
 function init () {
-  sun.src = 'https://img.lovepik.com/element/40097/4339.png_300.png'
-  moon.src =
-  'https://www.freepnglogos.com/uploads/moon-png/moon-png-annual-celestial-overview-simone-matthews-18.png'
-  earth.src =
-  'https://gd-filems.dancf.com/mcm79j/mcm79j/92054/b3162056-61ba-4ebd-8da1-fd98ce15a1cb31401764.png'
+  sun.src = image
+  moon.src = image
+  earth.src = image
   window.requestAnimationFrame(draw)
 }
 
