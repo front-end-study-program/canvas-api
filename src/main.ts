@@ -264,14 +264,69 @@ const ctx = canvas.getContext('2d')
 // ctx!.fillStyle = 'red'
 // ctx!.fillRect(50, 50, 100, 100)
 
-const img = new Image()
+// 裁剪
+// const img = new Image()
+// img.src = image
+// img.onload = () => {
+//   // 创建圆形裁剪路径
+//   ctx?.arc(250, 250, 200, 0, Math.PI * 2, false)
+//   ctx?.clip()
+//   // 创建完之后绘制
+//   ctx?.drawImage(img, 0, 0, 500, 500)
+// }
 
-img.src = image
+// 动画
+const sun = new Image()
+const moon = new Image()
+const earth = new Image()
 
-img.onload = () => {
-  // 创建圆形裁剪路径
-  ctx?.arc(250, 250, 200, 0, Math.PI * 2, false)
-  ctx?.clip()
-  // 创建完之后绘制
-  ctx?.drawImage(img, 0, 0, 500, 500)
+function init () {
+  sun.src = 'https://img.lovepik.com/element/40097/4339.png_300.png'
+  moon.src =
+  'https://www.freepnglogos.com/uploads/moon-png/moon-png-annual-celestial-overview-simone-matthews-18.png'
+  earth.src =
+  'https://gd-filems.dancf.com/mcm79j/mcm79j/92054/b3162056-61ba-4ebd-8da1-fd98ce15a1cb31401764.png'
+  window.requestAnimationFrame(draw)
 }
+
+function draw () {
+  ctx!.globalCompositeOperation = 'destination-over'
+  // 清空画布
+  ctx!.clearRect(0, 0, document.body.offsetWidth, document.body.offsetHeight)
+  ctx!.fillStyle = 'rgba(0, 0, 0, 0.4)'
+  ctx!.strokeStyle = 'rgba(0, 153, 255, 0.4)'
+  ctx!.save()
+  ctx!.translate(document.body.offsetWidth / 2, document.body.offsetHeight / 2)
+  // 画地球
+  const time = new Date()
+  const earthDeg =
+  ((2 * Math.PI) / 60) *
+  time.getSeconds() +
+  ((2 * Math.PI) / 60000) *
+  time.getMilliseconds()
+  ctx!.rotate(earthDeg)
+  ctx!.translate(200, 0)
+  ctx!.drawImage(earth, -20, -20, 40, 40)
+  // 画一个月亮
+  ctx!.save() // 第二次保存画布状态
+  const moonDeg =
+  ((2 * Math.PI) / 6) *
+  time.getSeconds() +
+  ((2 * Math.PI) / 6000) *
+  time.getMilliseconds()
+  ctx!.rotate(moonDeg)
+  ctx!.translate(0, 40)
+  ctx!.drawImage(moon, -7.5, -7.5, 15, 15)
+  // 恢复状态
+  ctx!.restore()
+  ctx!.restore()
+  // 画一个地球运行的轨迹
+  ctx!.beginPath()
+  ctx!.arc(250, 250, 200, 0, Math.PI * 2, false)
+  ctx!.stroke()
+  // 画一个太阳
+  ctx!.drawImage(sun, 0, 0, 500, 500)
+  window.requestAnimationFrame(draw)
+}
+
+init()
