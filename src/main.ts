@@ -276,55 +276,103 @@ const ctx = canvas.getContext('2d')
 // }
 
 // 动画
-const sun = new Image()
-const moon = new Image()
-const earth = new Image()
+// const sun = new Image()
+// const moon = new Image()
+// const earth = new Image()
 
-function init () {
-  sun.src = image
-  moon.src = image
-  earth.src = image
-  window.requestAnimationFrame(draw)
+// function init () {
+//   sun.src = image
+//   moon.src = image
+//   earth.src = image
+//   window.requestAnimationFrame(draw)
+// }
+
+// function draw () {
+//   ctx!.globalCompositeOperation = 'destination-over'
+//   // 清空画布
+//   ctx!.clearRect(0, 0, document.body.offsetWidth, document.body.offsetHeight)
+//   ctx!.fillStyle = 'rgba(0, 0, 0, 0.4)'
+//   ctx!.strokeStyle = 'rgba(0, 153, 255, 0.4)'
+//   ctx!.save()
+//   ctx!.translate(document.body.offsetWidth / 2, document.body.offsetHeight / 2)
+//   // 画地球
+//   const time = new Date()
+//   const earthDeg =
+//   ((2 * Math.PI) / 60) *
+//   time.getSeconds() +
+//   ((2 * Math.PI) / 60000) *
+//   time.getMilliseconds()
+//   ctx!.rotate(earthDeg)
+//   ctx!.translate(200, 0)
+//   ctx!.drawImage(earth, -20, -20, 40, 40)
+//   // 画一个月亮
+//   ctx!.save() // 第二次保存画布状态
+//   const moonDeg =
+//   ((2 * Math.PI) / 6) *
+//   time.getSeconds() +
+//   ((2 * Math.PI) / 6000) *
+//   time.getMilliseconds()
+//   ctx!.rotate(moonDeg)
+//   ctx!.translate(0, 40)
+//   ctx!.drawImage(moon, -7.5, -7.5, 15, 15)
+//   // 恢复状态
+//   ctx!.restore()
+//   ctx!.restore()
+//   // 画一个地球运行的轨迹
+//   ctx!.beginPath()
+//   ctx!.arc(250, 250, 200, 0, Math.PI * 2, false)
+//   ctx!.stroke()
+//   // 画一个太阳
+//   ctx!.drawImage(sun, 0, 0, 500, 500)
+//   window.requestAnimationFrame(draw)
+// }
+
+// init()
+
+// 高级动画，加上物理引擎
+// 1. 绘制小球
+const ball = {
+  x: 100,
+  y: 100,
+  vx: 1,
+  vy: 3,
+  radius: 25,
+  color: 'blue',
+  draw () {
+    ctx!.beginPath()
+    ctx!.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+    ctx!.closePath()
+    ctx!.fillStyle = this.color
+    ctx!.fill()
+  }
 }
+// ball.draw()
+
+// 2. 速率：通过给小球添加速率矢量进行移动。
+// 用requestAnimationFrame() 方法来实现，在每一帧里面，依旧用clear 清理掉之前帧里旧的圆形
 
 function draw () {
-  ctx!.globalCompositeOperation = 'destination-over'
-  // 清空画布
-  ctx!.clearRect(0, 0, document.body.offsetWidth, document.body.offsetHeight)
-  ctx!.fillStyle = 'rgba(0, 0, 0, 0.4)'
-  ctx!.strokeStyle = 'rgba(0, 153, 255, 0.4)'
-  ctx!.save()
-  ctx!.translate(document.body.offsetWidth / 2, document.body.offsetHeight / 2)
-  // 画地球
-  const time = new Date()
-  const earthDeg =
-  ((2 * Math.PI) / 60) *
-  time.getSeconds() +
-  ((2 * Math.PI) / 60000) *
-  time.getMilliseconds()
-  ctx!.rotate(earthDeg)
-  ctx!.translate(200, 0)
-  ctx!.drawImage(earth, -20, -20, 40, 40)
-  // 画一个月亮
-  ctx!.save() // 第二次保存画布状态
-  const moonDeg =
-  ((2 * Math.PI) / 6) *
-  time.getSeconds() +
-  ((2 * Math.PI) / 6000) *
-  time.getMilliseconds()
-  ctx!.rotate(moonDeg)
-  ctx!.translate(0, 40)
-  ctx!.drawImage(moon, -7.5, -7.5, 15, 15)
-  // 恢复状态
-  ctx!.restore()
-  ctx!.restore()
-  // 画一个地球运行的轨迹
-  ctx!.beginPath()
-  ctx!.arc(250, 250, 200, 0, Math.PI * 2, false)
-  ctx!.stroke()
-  // 画一个太阳
-  ctx!.drawImage(sun, 0, 0, 500, 500)
+  // ctx!.clearRect(0, 0, canvas.width, canvas.height)
+  // 拖尾效果
+  ctx!.fillStyle = 'rgba(255, 255, 255, 0.3)'
+  ctx!.fillRect(0, 0, canvas.width, canvas.height)
+  ball.draw()
+  // 添加加速度
+  ball.vy *= 0.99
+  ball.vy += 0.25
+
+  // 3. 边界：反弹
+  if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+    ball.vy = -ball.vy
+  }
+  if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+    ball.vx = -ball.vx
+  }
+
+  // 4. 添加速率
+  ball.x += ball.vx
+  ball.y += ball.vy
+
   window.requestAnimationFrame(draw)
 }
-
-init()
+window.requestAnimationFrame(draw)
