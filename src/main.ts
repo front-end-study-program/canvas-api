@@ -2,8 +2,8 @@
 import image from './image/logo.png'
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
-canvas.width = document.body.offsetWidth
-canvas.height = document.body.offsetHeight
+// canvas.width = document.body.offsetWidth
+// canvas.height = document.body.offsetHeight
 const ctx = canvas.getContext('2d')
 
 // const draw = new Draw(ctx!)
@@ -376,3 +376,34 @@ function draw () {
   window.requestAnimationFrame(draw)
 }
 window.requestAnimationFrame(draw)
+
+// 保存图片
+const img = document.getElementById('img') as HTMLImageElement
+const btn = document.getElementById('btn')
+
+btn?.addEventListener('click', () => {
+  const url = canvas.toDataURL('image/png')
+  img.src = url
+
+  // 将base64转换为文件对象
+  const arr = url.split(',')
+  const [firstItem] = arr
+  const [, mime] = firstItem.match(/:(.*?);/) as RegExpMatchArray // 此处得到的为文件类型
+  const bstr = atob(arr[1]) // 此处将base64解码
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n)
+  }
+  // 通过以下方式将以上变量生成文件对象，三个参数分别为文件内容、文件名、文件类型
+  const file = new File([u8arr], 'filename', { type: mime })
+  // 将文件对象通过a标签下载
+  const aDom = document.createElement('a') // 创建一个 a 标签
+  aDom.download = file.name // 设置文件名
+  const href = URL.createObjectURL(file) // 将file对象转成 UTF-16 字符串
+  aDom.href = href // 放入href
+  document.body.appendChild(aDom) // 将a标签插入 body
+  aDom.click() // 触发 a 标签的点击
+  document.body.removeChild(aDom) // 移除刚才插入的 a 标签
+  URL.revokeObjectURL(href) // 释放刚才生成的 UTF-16 字符串
+})

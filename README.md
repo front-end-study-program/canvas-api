@@ -646,3 +646,22 @@ img.onload = () => {
   ctx?.drawImage(img, 0, 0, 500, 500)
 }
 ```
+
+### 应用
+
+#### 保存图片
+
+toDataURL(type?, quality?)
+
+> 将当前 canvas 转换为图片URL，第一参数设置图片类型，第二个参数设置图片的清晰度
+
+```ts
+const canvas = document.getElementById('canvas') as HTMLCanvasElement
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.arc(100, 100, 25, 0, Math.PI * 2, true)
+ctx.closePath()
+ctx.fillStyle = 'blue'
+ctx.fill()
+const url = canvas.toDataURL();
+```
