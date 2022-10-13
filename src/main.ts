@@ -375,7 +375,7 @@ function draw () {
 
   window.requestAnimationFrame(draw)
 }
-window.requestAnimationFrame(draw)
+// window.requestAnimationFrame(draw)
 
 // 保存图片
 const img = document.getElementById('img') as HTMLImageElement
@@ -406,4 +406,53 @@ btn?.addEventListener('click', () => {
   aDom.click() // 触发 a 标签的点击
   document.body.removeChild(aDom) // 移除刚才插入的 a 标签
   URL.revokeObjectURL(href) // 释放刚才生成的 UTF-16 字符串
+})
+
+// 反向颜色
+
+const originalEl = document.getElementById('original')
+const grayscaleEl = document.getElementById('grayscale')
+const invertedEl = document.getElementById('inverted')
+
+const img1 = new Image()
+img1.crossOrigin = 'anonymous'
+img1.src = 'https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF'
+img1.onload = function () {
+  ctx!.drawImage(img1, 0, 0)
+}
+const original = function () {
+  ctx!.drawImage(img1, 0, 0)
+}
+const invert = function () {
+  ctx!.drawImage(img1, 0, 0)
+  const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+  const { data } = imageData
+  for (let i = 0; i < data.length; i += 4) {
+    data[i] = 255 - data[i] // red
+    data[i + 1] = 255 - data[i + 1] // green
+    data[i + 2] = 255 - data[i + 2] // blue
+  }
+  ctx!.putImageData(imageData, 0, 0)
+}
+
+const grayscale = function () {
+  ctx!.drawImage(img1, 0, 0)
+  const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+  const { data } = imageData
+  for (let i = 0; i < data.length; i += 4) {
+    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+    data[i] = avg // red
+    data[i + 1] = avg // green
+    data[i + 2] = avg // blue
+  }
+  ctx!.putImageData(imageData, 0, 0)
+}
+originalEl!.addEventListener('click', (evt) => {
+  original()
+})
+grayscaleEl!.addEventListener('click', (evt) => {
+  grayscale()
+})
+invertedEl!.addEventListener('click', (evt) => {
+  invert()
 })
