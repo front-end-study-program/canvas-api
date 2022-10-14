@@ -331,128 +331,164 @@ const ctx = canvas.getContext('2d')
 
 // 高级动画，加上物理引擎
 // 1. 绘制小球
-const ball = {
-  x: 100,
-  y: 100,
-  vx: 1,
-  vy: 3,
-  radius: 25,
-  color: 'blue',
-  draw () {
-    ctx!.beginPath()
-    ctx!.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
-    ctx!.closePath()
-    ctx!.fillStyle = this.color
-    ctx!.fill()
-  }
-}
+// const ball = {
+//   x: 100,
+//   y: 100,
+//   vx: 1,
+//   vy: 3,
+//   radius: 25,
+//   color: 'blue',
+//   draw () {
+//     ctx!.beginPath()
+//     ctx!.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true)
+//     ctx!.closePath()
+//     ctx!.fillStyle = this.color
+//     ctx!.fill()
+//   }
+// }
 // ball.draw()
 
 // 2. 速率：通过给小球添加速率矢量进行移动。
 // 用requestAnimationFrame() 方法来实现，在每一帧里面，依旧用clear 清理掉之前帧里旧的圆形
 
-function draw () {
-  // ctx!.clearRect(0, 0, canvas.width, canvas.height)
-  // 拖尾效果
-  ctx!.fillStyle = 'rgba(255, 255, 255, 0.3)'
-  ctx!.fillRect(0, 0, canvas.width, canvas.height)
-  ball.draw()
-  // 添加加速度
-  ball.vy *= 0.99
-  ball.vy += 0.25
+// function draw () {
+//   // ctx!.clearRect(0, 0, canvas.width, canvas.height)
+//   // 拖尾效果
+//   ctx!.fillStyle = 'rgba(255, 255, 255, 0.3)'
+//   ctx!.fillRect(0, 0, canvas.width, canvas.height)
+//   ball.draw()
+//   // 添加加速度
+//   ball.vy *= 0.99
+//   ball.vy += 0.25
 
-  // 3. 边界：反弹
-  if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
-    ball.vy = -ball.vy
-  }
-  if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
-    ball.vx = -ball.vx
-  }
+//   // 3. 边界：反弹
+//   if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+//     ball.vy = -ball.vy
+//   }
+//   if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+//     ball.vx = -ball.vx
+//   }
 
-  // 4. 添加速率
-  ball.x += ball.vx
-  ball.y += ball.vy
+//   // 4. 添加速率
+//   ball.x += ball.vx
+//   ball.y += ball.vy
 
-  window.requestAnimationFrame(draw)
-}
+//   window.requestAnimationFrame(draw)
+// }
 // window.requestAnimationFrame(draw)
 
 // 保存图片
-const img = document.getElementById('img') as HTMLImageElement
-const btn = document.getElementById('btn')
+// const img = document.getElementById('img') as HTMLImageElement
+// const btn = document.getElementById('btn')
 
-btn?.addEventListener('click', () => {
-  const url = canvas.toDataURL('image/png')
-  img.src = url
+// btn?.addEventListener('click', () => {
+//   const url = canvas.toDataURL('image/png')
+//   img.src = url
 
-  // 将base64转换为文件对象
-  const arr = url.split(',')
-  const [firstItem] = arr
-  const [, mime] = firstItem.match(/:(.*?);/) as RegExpMatchArray // 此处得到的为文件类型
-  const bstr = atob(arr[1]) // 此处将base64解码
-  let n = bstr.length
-  const u8arr = new Uint8Array(n)
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n)
-  }
-  // 通过以下方式将以上变量生成文件对象，三个参数分别为文件内容、文件名、文件类型
-  const file = new File([u8arr], 'filename', { type: mime })
-  // 将文件对象通过a标签下载
-  const aDom = document.createElement('a') // 创建一个 a 标签
-  aDom.download = file.name // 设置文件名
-  const href = URL.createObjectURL(file) // 将file对象转成 UTF-16 字符串
-  aDom.href = href // 放入href
-  document.body.appendChild(aDom) // 将a标签插入 body
-  aDom.click() // 触发 a 标签的点击
-  document.body.removeChild(aDom) // 移除刚才插入的 a 标签
-  URL.revokeObjectURL(href) // 释放刚才生成的 UTF-16 字符串
-})
+//   // 将base64转换为文件对象
+//   const arr = url.split(',')
+//   const [firstItem] = arr
+//   const [, mime] = firstItem.match(/:(.*?);/) as RegExpMatchArray // 此处得到的为文件类型
+//   const bstr = atob(arr[1]) // 此处将base64解码
+//   let n = bstr.length
+//   const u8arr = new Uint8Array(n)
+//   while (n--) {
+//     u8arr[n] = bstr.charCodeAt(n)
+//   }
+//   // 通过以下方式将以上变量生成文件对象，三个参数分别为文件内容、文件名、文件类型
+//   const file = new File([u8arr], 'filename', { type: mime })
+//   // 将文件对象通过a标签下载
+//   const aDom = document.createElement('a') // 创建一个 a 标签
+//   aDom.download = file.name // 设置文件名
+//   const href = URL.createObjectURL(file) // 将file对象转成 UTF-16 字符串
+//   aDom.href = href // 放入href
+//   document.body.appendChild(aDom) // 将a标签插入 body
+//   aDom.click() // 触发 a 标签的点击
+//   document.body.removeChild(aDom) // 移除刚才插入的 a 标签
+//   URL.revokeObjectURL(href) // 释放刚才生成的 UTF-16 字符串
+// })
 
 // 反向颜色
 
-const originalEl = document.getElementById('original')
-const grayscaleEl = document.getElementById('grayscale')
-const invertedEl = document.getElementById('inverted')
+// const originalEl = document.getElementById('original')
+// const grayscaleEl = document.getElementById('grayscale')
+// const invertedEl = document.getElementById('inverted')
 
-const img1 = new Image()
-img1.crossOrigin = 'anonymous'
-img1.src = 'https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF'
-img1.onload = function () {
-  ctx!.drawImage(img1, 0, 0)
-}
-const original = function () {
-  ctx!.drawImage(img1, 0, 0)
-}
-const invert = function () {
-  ctx!.drawImage(img1, 0, 0)
-  const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
-  const { data } = imageData
-  for (let i = 0; i < data.length; i += 4) {
-    data[i] = 255 - data[i] // red
-    data[i + 1] = 255 - data[i + 1] // green
-    data[i + 2] = 255 - data[i + 2] // blue
-  }
-  ctx!.putImageData(imageData, 0, 0)
+// const img1 = new Image()
+// img1.crossOrigin = 'anonymous'
+// img1.src = 'https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF'
+// img1.onload = function () {
+//   ctx!.drawImage(img1, 0, 0)
+// }
+// const original = function () {
+//   ctx!.drawImage(img1, 0, 0)
+// }
+// const invert = function () {
+//   ctx!.drawImage(img1, 0, 0)
+//   const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+//   const { data } = imageData
+//   for (let i = 0; i < data.length; i += 4) {
+//     data[i] = 255 - data[i] // red
+//     data[i + 1] = 255 - data[i + 1] // green
+//     data[i + 2] = 255 - data[i + 2] // blue
+//   }
+//   ctx!.putImageData(imageData, 0, 0)
+// }
+
+// const grayscale = function () {
+//   ctx!.drawImage(img1, 0, 0)
+//   const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+//   const { data } = imageData
+//   for (let i = 0; i < data.length; i += 4) {
+//     const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+//     data[i] = avg // red
+//     data[i + 1] = avg // green
+//     data[i + 2] = avg // blue
+//   }
+//   ctx!.putImageData(imageData, 0, 0)
+// }
+// originalEl!.addEventListener('click', (evt) => {
+//   original()
+// })
+// grayscaleEl!.addEventListener('click', (evt) => {
+//   grayscale()
+// })
+// invertedEl!.addEventListener('click', (evt) => {
+//   invert()
+// })
+
+// 像素数据
+const img = new Image()
+img.crossOrigin = 'anonymous'
+img.src = 'https://t7.baidu.com/it/u=1819248061,230866778&fm=193&f=GIF'
+img.onload = function () {
+  ctx!.drawImage(img, 0, 0)
+  img.style.display = 'none'
 }
 
-const grayscale = function () {
-  ctx!.drawImage(img1, 0, 0)
-  const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
-  const { data } = imageData
-  for (let i = 0; i < data.length; i += 4) {
-    const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
-    data[i] = avg // red
-    data[i + 1] = avg // green
-    data[i + 2] = avg // blue
+const hoveredColor = document.getElementById('hovered')
+const selectedColor = document.getElementById('selected')
+function pickColor (
+  type: string,
+  event: MouseEvent,
+  destination: HTMLElement | null
+) {
+  const x = event.layerX
+  const y = event.layerY
+  const pixel = ctx!.getImageData(x, y, 1, 1)
+  const { data } = pixel
+  const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`
+  destination!.style.background = rgba
+  if (type === 'move') {
+    destination!.textContent = '划过的颜色为：' + rgba
+  } else {
+    destination!.textContent = '选中的颜色为：' + rgba
   }
-  ctx!.putImageData(imageData, 0, 0)
+  return rgba
 }
-originalEl!.addEventListener('click', (evt) => {
-  original()
+canvas.addEventListener('mousemove', (event) => {
+  pickColor('move', event, hoveredColor)
 })
-grayscaleEl!.addEventListener('click', (evt) => {
-  grayscale()
-})
-invertedEl!.addEventListener('click', (evt) => {
-  invert()
+canvas.addEventListener('click', (event) => {
+  pickColor('click', event, selectedColor)
 })
